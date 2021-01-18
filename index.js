@@ -15,10 +15,10 @@ const {
 } = require('./utils');
 
 const graphAPIEndpoints = {
-	snx: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix',
+	snx: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos2',
 	depot: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-depot',
-	exchanges: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-exchanges',
-	rates: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-rates',
+	exchanges: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-exchanges2',
+	rates: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-rates-1',
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-loans',
 	limitOrders: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-limit-orders',
