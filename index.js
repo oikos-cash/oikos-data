@@ -15,9 +15,9 @@ const {
 } = require('./utils');
 
 const graphAPIEndpoints = {
-	snx: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos2',
+	snx: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos',
 	depot: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-depot',
-	exchanges: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-exchanges2',
+	exchanges: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-exchanges',
 	rates: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-rates-1',
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-loans',
