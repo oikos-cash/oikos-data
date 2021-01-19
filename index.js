@@ -18,7 +18,7 @@ const graphAPIEndpoints = {
 	snx: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos',
 	depot: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-depot',
 	exchanges: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-exchanges',
-	rates: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-rates-1',
+	rates: 'https://thegraph.oikos.cash/subgraphs/name/oikos-team/oikos-rates',
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-loans',
 	limitOrders: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-limit-orders',
