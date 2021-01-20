@@ -263,7 +263,6 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
-							network: `\\"${network}\\"`,
 							timestamp_gte: roundTimestampTenSeconds(minTimestamp) || undefined,
 							timestamp_lte: roundTimestampTenSeconds(maxTimestamp) || undefined,
 							block_gte: minBlock || undefined,
