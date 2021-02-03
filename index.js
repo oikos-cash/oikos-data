@@ -711,6 +711,21 @@ module.exports = {
 			}).catch(err => console.error(err));
 		},
 
+		activeStakers({ max = 30 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.snx,
+				max,
+				query: {
+					entity: 'activeStakers',
+					selection: {
+						orderBy: 'id',
+						orderDirection: 'desc',
+					},
+					properties: ['id'],
+				},
+			}).catch(err => console.error(err));
+		},
+
 		totalActiveStakers() {
 			return pageResults({
 				api: graphAPIEndpoints.snx,
