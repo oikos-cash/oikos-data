@@ -454,7 +454,7 @@ module.exports = {
 	},
 	rate: {
 		snxAggregate({ timeSeries = '1d', max = 30 } = {}) {
-			const entityMap = { '1d': 'dailySNXPrices', '15m': 'fifteenMinuteOKSPrices' };
+			const entityMap = { '1d': 'dailyOKSPrices', '15m': 'fifteenMinuteOKSPrices' };
 			return pageResults({
 				api: graphAPIEndpoints.rates,
 				max,
