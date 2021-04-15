@@ -15,10 +15,10 @@ const {
 } = require('./utils');
 
 const graphAPIEndpoints = {
-	snx: 'https://api.thegraph.com/subgraphs/name/oikos1/oikos',
+	snx: 'https://api.thegraph.com/subgraphs/name/oikos-cash/oikos',
 	depot: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-depot',
-	exchanges: 'https://thegraph-bsc.oikos.cash/subgraphs/name/oikos-team/oikos-exchanges',
-	rates: 'https://thegraph-bsc.oikos.cash/subgraphs/name/oikos-team/oikos-rates',
+	exchanges: 'https://api.thegraph.com/subgraphs/name/oikos-cash/exchanges',
+	rates: 'https://api.thegraph.com/subgraphs/name/oikos-cash/rates',
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-loans',
 	limitOrders: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-limit-orders',
@@ -454,7 +454,7 @@ module.exports = {
 	},
 	rate: {
 		snxAggregate({ timeSeries = '1d', max = 30 } = {}) {
-			const entityMap = { '1d': 'dailySNXPrices', '15m': 'fifteenMinuteSNXPrices' };
+			const entityMap = { '1d': 'dailySNXPrices', '15m': 'fifteenMinuteOKSPrices' };
 			return pageResults({
 				api: graphAPIEndpoints.rates,
 				max,
@@ -751,7 +751,7 @@ module.exports = {
 				api: graphAPIEndpoints.snx,
 				max,
 				query: {
-					entity: 'snxholders',
+					entity: 'oksholders',
 					selection: {
 						orderBy: 'collateral',
 						orderDirection: 'desc',
