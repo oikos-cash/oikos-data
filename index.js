@@ -394,7 +394,7 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							source: synth ? `\\"${synth}\\"` : undefined,
-							source_not: '\\"SNX\\"',
+							source_not: '\\"OKS\\"',
 							from: from ? `\\"${from}\\"` : undefined,
 							to: to ? `\\"${to}\\"` : undefined,
 							from_not: `\\"${ZERO_ADDRESS}\\"`, // Ignore Issue events
@@ -871,7 +871,7 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
-							source: '\\"SNX\\"',
+							source: '\\"OKS\\"',
 							from: from ? `\\"${from}\\"` : undefined,
 							to: to ? `\\"${to}\\"` : undefined,
 							block_gte: minBlock || undefined,
@@ -1374,13 +1374,13 @@ module.exports = {
 						orderDirection: 'asc',
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
-							deadline_gte: roundTimestampTenSeconds(minTime) || undefined,
-							deadline_lte: roundTimestampTenSeconds(maxTime) || undefined,
+							//deadline_gte: roundTimestampTenSeconds(minTime) || undefined,
+							//deadline_lte: roundTimestampTenSeconds(maxTime) || undefined,
 						},
 					},
 					properties: ['id', 'deadline', 'account', 'collateral', 'collateralRatio', 'liquidatableNonEscrowOKS'],
 				},
-			}).then(results =>
+			}).then(results => 
 				results.map(({ id, deadline, account, collateralRatio, liquidatableNonEscrowOKS, collateral }) => ({
 					id,
 					deadline: Number(deadline * 1000),
@@ -1467,7 +1467,7 @@ module.exports = {
 			return this.accountsFlaggedForLiquidation({
 				account,
 				max,
-				maxTime: maxTime + Math.round(86400 * 3),
+				//maxTime: maxTime + Math.round(86400 * 3),
 				minTime: minTime + Math.round(86400 * 3),
 			}).then(flaggedResults =>
 				this.accountsRemovedFromLiquidation({ account, max, maxTime, minTime }).then(removedResults => {
