@@ -22,7 +22,7 @@ const graphAPIEndpoints = {
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/oikos-cash/oikosloans',
 	limitOrders: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-limit-orders',
-	exchanger: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-exchanger',
+	exchanger: 'https://api.thegraph.com/subgraphs/name/oikos1/exchanger',
 	liquidations: 'https://api.thegraph.com/subgraphs/name/oikos1/liquidations',
 };
 
