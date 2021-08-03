@@ -1378,16 +1378,16 @@ module.exports = {
 							deadline_lte: roundTimestampTenSeconds(maxTime) || undefined,
 						},
 					},
-					properties: ['id', 'deadline', 'account', 'collateral', 'collateralRatio', 'liquidatableNonEscrowSNX'],
+					properties: ['id', 'deadline', 'account', 'collateral', 'collateralRatio', 'liquidatableNonEscrowOKS'],
 				},
 			}).then(results =>
-				results.map(({ id, deadline, account, collateralRatio, liquidatableNonEscrowSNX, collateral }) => ({
+				results.map(({ id, deadline, account, collateralRatio, liquidatableNonEscrowOKS, collateral }) => ({
 					id,
 					deadline: Number(deadline * 1000),
 					account,
 					collateral: collateral / 1e18,
 					collateralRatio: collateralRatio / 1e18,
-					liquidatableNonEscrowSNX: liquidatableNonEscrowSNX / 1e18,
+					liquidatableNonEscrowOKS: liquidatableNonEscrowOKS / 1e18,
 				})),
 			);
 		},
