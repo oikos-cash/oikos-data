@@ -12,6 +12,7 @@ const {
 	snx,
 	binaryOptions,
 	etherCollateral,
+	vbnbCollateral,
 	limitOrders,
 	exchanger,
 	liquidations,
@@ -468,6 +469,44 @@ program
 	.action(async ({ max, account, isOpen, collateralMinted }) => {
 		etherCollateral
 			.loans({ max, account, isOpen, collateralMinted })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('vbnbCollateral.loans')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --account <value>', 'Account to filter on, if any')
+	.option('-o, --is-open <value>', 'If the loan is open or closed')
+	.option('-c, --collateral-minted <value>', 'The collateral minted for the loan')
+
+	.action(async ({ max, account, isOpen, collateralMinted }) => {
+		vbnbCollateral
+			.loans({ max, account, isOpen, collateralMinted })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('vbnbCollateral.partiallyLiquidatedLoans')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --account <value>', 'Account to filter on, if any')
+
+	.action(async ({ max, account }) => {
+		vbnbCollateral
+			.partiallyLiquidatedLoans({ max, account })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('vbnbCollateral.liquidatedLoans')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --account <value>', 'Account to filter on, if any')
+
+	.action(async ({ max, account }) => {
+		vbnbCollateral
+			.liquidatedLoans({ max, account })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

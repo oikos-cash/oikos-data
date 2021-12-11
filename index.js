@@ -21,6 +21,7 @@ const graphAPIEndpoints = {
 	rates: 'https://api.thegraph.com/subgraphs/name/oikos-cash/rates',
 	binaryOptions: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-binary-options',
 	etherCollateral: 'https://api.thegraph.com/subgraphs/name/oikos-cash/oikosloans',
+	vbnbCollateral: 'https://api.thegraph.com/subgraphs/name/oikos-cash/loansvbnb',
 	limitOrders: 'https://api.thegraph.com/subgraphs/name/synthetixio-team/synthetix-limit-orders',
 	exchanger: 'https://api.thegraph.com/subgraphs/name/oikos1/exchanger',
 	liquidations: 'https://api.thegraph.com/subgraphs/name/oikos1/liquidations',
@@ -1236,6 +1237,117 @@ module.exports = {
 				.catch(err => console.error(err));
 		},
 	},
+	vbnbCollateral: {
+		loans({ max = Infinity, isOpen = undefined, account = undefined, collateralMinted = undefined } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.vbnbCollateral,
+				max,
+				query: {
+					entity: 'loans',
+					selection: {
+						orderBy: 'createdAt',
+						orderDirection: 'desc',
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+							collateralMinted: collateralMinted ? `\\"${collateralMinted}\\"` : undefined,
+							isOpen,
+						},
+					},
+					properties: [
+						'id',
+						'account',
+						'amount',
+						'isOpen',
+						'createdAt',
+						'closedAt',
+						//'txHash',
+						//'hasPartialLiquidations',
+						//'collateralMinted',
+					],
+				},
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							account,
+							amount,
+							isOpen,
+							createdAt,
+							closedAt,
+							//txHash,
+							//hasPartialLiquidations,
+							//collateralMinted,
+						}) => ({
+							id: Number(getHashFromId(id)),
+							account,
+							createdAt: new Date(Number(createdAt * 1000)),
+							closedAt: closedAt ? new Date(Number(closedAt * 1000)) : null,
+							amount: amount / 1e18,
+							isOpen,
+							//txHash,
+							//hasPartialLiquidations,
+							//collateralMinted,
+						}),
+					),
+				)
+				.catch(err => console.error(err));
+		},
+		partiallyLiquidatedLoans({ max = Infinity, account = undefined, loanId = undefined } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.vbnbCollateral,
+				max,
+				query: {
+					entity: 'loanPartiallyLiquidateds',
+					selection: {
+						where: {
+							loanId: loanId ? `\\"${loanId}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['account', 'liquidatedAmount', 'liquidator', 'liquidatedCollateral', 'loanId', 'id'],
+				},
+			})
+				.then(results =>
+					results.map(({ account, liquidatedAmount, liquidator, liquidatedCollateral, loanId, id }) => ({
+						loanId: Number(loanId),
+						txHash: getHashFromId(id),
+						liquidatedCollateral: liquidatedCollateral / 1e18,
+						penaltyAmount: (liquidatedCollateral / 1e18) * 0.1,
+						liquidator,
+						liquidatedAmount: liquidatedAmount / 1e18,
+						account,
+					})),
+				)
+				.catch(err => console.error(err));
+		},
+		liquidatedLoans({ max = Infinity, account = undefined, loanId = undefined } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.vbnbCollateral,
+				max,
+				query: {
+					entity: 'loanLiquidateds',
+					selection: {
+						where: {
+							loanId: loanId ? `\\"${loanId}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['account', 'liquidator', 'loanId', 'id', 'timestamp'],
+				},
+			})
+				.then(results =>
+					results.map(({ account, liquidator, loanId, id, timestamp }) => ({
+						loanId: Number(loanId),
+						txHash: getHashFromId(id),
+						liquidator,
+						account,
+						timestamp: new Date(Number(timestamp * 1000)),
+					})),
+				)
+				.catch(err => console.error(err));
+		},
+	},	
 	limitOrders: {
 		orders({ max = Infinity, account = undefined } = {}) {
 			return pageResults({
